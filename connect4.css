@@ -1,28 +1,149 @@
 /* game board table */
+body {
+  margin: 0%;
+  background-color: rgb(234, 234, 234);
+  font-family: Rubik;
+  border: none;
+}
+
+body section {
+  margin: 0%;
+  height: 170px;
+  background-color: rgb(67, 140, 200);
+  border-bottom: 3px solid rgba(0, 0, 0, 0.2);
+}
+#game {
+  position: relative;
+  margin-top: 10px;
+  border: 2px solid rgba(0, 0, 0, 0.5);
+  width: 440px;
+  background-color: rgb(186, 186, 186);
+  border-radius: 10px;
+  left: 50%;
+  transform: translate(-50%);
+  padding: 10px;
+  box-shadow: 3px 2px 2px rgb(0, 0, 0, .2);
+}
+
+h1 {
+  text-align: center;
+  margin: 0%;
+  font-size: 5em;
+  color: rgb(231, 208, 0);
+  text-shadow: 3px 2px 2px rgb(0, 0, 0,.3);
+}
+h2 {
+  text-align: center;
+  font-size: 3em;
+  margin: 10px;
+  color: red;
+  text-shadow: 2px 1px 1px rgb(0, 0, 0,.3);
+}
 
 #board td {
-  width: 50px;
-  height: 50px;
+  margin: 10px;
+  width: 60px;
+  height: 60px;
   border: solid 1px #666;
+  border-radius: 50%;
+  background-color: rgb(234, 234, 234);
 }
+
 
 /* pieces are div within game table cells: draw as colored circles */
 
 .piece {
   /* TODO: make into circles */
-  margin: 5px;
-  width: 80%;
-  height: 80%;
+  margin: 0%;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  -webkit-box-shadow:inset 0px 0px 0px 3px rgb(0, 0, 0, .1);
+  -moz-box-shadow:inset 0px 0px 0px 3px rgb(0, 0, 0, .1);
+  box-shadow:inset 0px 0px 0px 3px rgb(0, 0, 0, .1);
+}
+
+.drop-in {
+  animation-name: drop-in;
+  animation-duration: 500ms;
+}
+
+@keyframes drop-in {
+  from {
+    transform: translateY(-420px);
+  }
+  to {
+    transform: translateY(0px);
+  }
 }
 
 /* TODO: make pieces red/blue,  depending on player 1/2 piece */
+#p1 {
+  background-color: red;
+}
+
+#p2 {
+  background-color: blue;
+  
+}
 
 /* column-top is table row of clickable areas for each column */
 
 #column-top td {
-  border: dashed 1px lightgray;
+  position: relative;
+  border: dashed 1px rgb(173, 173, 173);
 }
 
 #column-top td:hover {
+  cursor: pointer;
   background-color: gold;
+  transition: 250ms ease-in-out;
+}
+
+.end {
+  top: 173px;
+  z-index: 2;
+  position: absolute;
+  width: 100vw;
+  height: 400px;
+  background-color: rgba(0, 0, 0, 0.8);
+  animation-name: end;
+  animation-duration: 800ms;
+}
+
+@keyframes end {
+  from {
+    transform : translateY(-500px);
+  }
+  to {
+    transform : translateY(0px);
+  }
+}
+
+.restart {
+  position: absolute;
+  bottom: 25%;
+  left: 50%;
+  transform: translate(-50%);
+  height: 60px;
+  width: 180px;
+  background-color: silver;
+  border-radius: 30px;
+  text-shadow: 2px 1px 1px rgba(0, 0, 0, 0.3);
+  font-size: 1.5em;
+  font-family: Rubik;
+}
+
+#winMsg{
+  padding: 40px;
+  color: gold;
+  text-shadow: 3px 2px 2px rgba(255, 255, 255, 0.5)
+}
+
+.restart:hover {
+  cursor: pointer;
+  background-color: rgb(148, 148, 148);
+  color: yellow;
+  transition: 200ms ease-in-out;
+  text-shadow: none;
 }
