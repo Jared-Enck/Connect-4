@@ -122,7 +122,7 @@ input:hover{
 /* column-top is table row of clickable areas for each column */
 
 #column-top td {
-  border: dashed 1px lightgray;
+  border: dashed 2px rgb(255, 238, 0);
 }
 
 #column-top td:hover {
@@ -157,6 +157,7 @@ input:hover{
   height: 60px;
   width: 180px;
   border: none;
+  color: rgb(230, 230, 230);
   background-color: silver;
   border-radius: 30px;
   text-shadow: 2px 1px 1px rgba(0, 0, 0, 0.3);
