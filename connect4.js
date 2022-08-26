@@ -26,6 +26,7 @@ class Game {
     startBtn.addEventListener('click', ()=>{
       window.location.reload();
     })
+    document.querySelector('.instruction').remove()
     this.makeBoard();
     this.makeHtmlBoard();
   }
