@@ -14,7 +14,7 @@ body {
 h2{
   text-align: center;
   font-style: italic;
-  color: #666;
+  color: rgb(139, 139, 139);
 }
 form {
   display: flex;
