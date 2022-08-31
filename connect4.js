@@ -6,27 +6,30 @@
  */
 const pP1 = document.getElementById("pP1");
 const pP2 = document.getElementById("pP2");
-const startBtn = document.querySelector("#start")
+const startBtn = document.querySelector("#start");
+
+startBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  new Game(6, 7).startGame();
+});
 
 class Game {
   constructor(height, width) {
     this.board = [];
     this.height = height;
     this.width = width;
-    startBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      this.startGame();
-      this.p1 = new Player(document.getElementById("p1").value);
-      this.p2 = new Player(document.getElementById("p2").value);
-      this.currPlayer = this.p1;
-    });
+    this.p1 = new Player(document.getElementById("p1").value);
+    this.p2 = new Player(document.getElementById("p2").value);
+    this.currPlayer = this.p1;
   }
   startGame() {
     pP1.classList.add("currPlayer");
-    startBtn.addEventListener('click', ()=>{
+    startBtn.removeEventListener('click', this.e);
+    startBtn.innerText = 'Restart'
+    startBtn.addEventListener("click", () => {
       window.location.reload();
-    })
-    document.querySelector('.instruction').remove()
+    });
+    document.querySelector(".instruction").remove();
     this.makeBoard();
     this.makeHtmlBoard();
   }
@@ -88,14 +91,7 @@ class Game {
     const winMsg = document.createElement("h1");
     winMsg.setAttribute("id", "winMsg");
     winMsg.innerHTML = msg;
-    end.prepend(winMsg);
-    const restart = document.createElement("button");
-    restart.classList.add("restart");
-    restart.innerHTML = "New Game";
-    restart.addEventListener("click", () => {
-      window.location.reload();
-    });
-    end.appendChild(restart);
+    end.append(winMsg);
   }
   togglePlayer() {
     if (this.currPlayer === this.p1) {
@@ -109,21 +105,24 @@ class Game {
   handleClick(evt) {
     const x = +evt.target.id;
     const y = this.findSpotForCol(x);
+    let isWin = false
     if (y === null) {
       return;
     }
     this.board[y][x] = this.currPlayer;
     this.placeInTable(y, x);
     if (this.checkForWin()) {
-      this.currPlayer === this.p1 ?
-       this.endGame(`Player 1 wins!`): this.endGame(`Player 2 wins!`);
+      isWin = true;
+      this.currPlayer === this.p1
+        ? this.endGame(`Player 1 wins!`)
+        : this.endGame(`Player 2 wins!`);
     }
     if (this.board.every((row) => row.every((cell) => cell))) {
       return this.endGame("Tie!");
     }
-    if (!this.checkForWin()){
-    this.togglePlayer();
-    this.currPlayer = this.currPlayer === this.p1 ? this.p2 : this.p1;
+    if (!isWin) {
+      this.togglePlayer();
+      this.currPlayer = this.currPlayer === this.p1 ? this.p2 : this.p1;
     }
   }
   checkForWin() {
@@ -176,5 +175,3 @@ class Player {
     this.color = color;
   }
 }
-
-new Game(6, 7);
